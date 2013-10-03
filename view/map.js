@@ -8,17 +8,17 @@ var projection = d3.geo.albersUsa()
 
 var path = d3.geo.path().projection(projection);
 
-var svg = d3.select("#huge-map").append("svg")
+var map = d3.select("#huge-map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-svg.append("rect")
+map.append("rect")
     .attr("class", "background")
     .attr("width", width)
     .attr("height", height)
     .on("click", mapClick);
 
-var g = svg.append("g");
+var g = map.append("g");
 
 queue()
     .defer(d3.json, "us.json")
