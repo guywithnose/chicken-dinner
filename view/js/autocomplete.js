@@ -43,7 +43,7 @@ $(function() {
 
                             vehicleCounts = d3.map();
                             queue().defer(d3.json, "us.json")
-                                .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.zip, +d.data); })
+                                .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.fips, +d.data); })
                                 .await(ready);
                         }
                     }
