@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="bootstrap-3.0.0/assets/ico/favicon.png">
 
-    <title>Chicken Dinner</title>
+    <title>DataBake&trade; v0.5</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
@@ -24,26 +24,7 @@
   </head>
 
   <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Chicken Dinner LOGO</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+<?php include 'nav.php' ?>
     <div class="jumbotron">
     <div class="container">
         <div class="input-group input-group-lg">
@@ -69,7 +50,7 @@
         <tbody>
           <tr>
             <td>1</td>
-            <td><a href="detail.html">Detail Page Link</a></td>
+            <td><a href="detail.php">Detail Page Link</a></td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
@@ -101,7 +82,7 @@
         </div>
         <div class="col-lg-4">
           <h2>Target opportunities</h2>
-          <p>Zero in on the best salaries and job markets. Find the best place to move your family. Discover where your best client prospects are</p>
+          <p>Zero in on the best salaries, job markets, etc. Find the best place to move your family. Discover where your best client prospects are</p>
           <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
        </div>
         <div class="col-lg-4">
@@ -110,24 +91,7 @@
           <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
         </div>
       </div>
-
-      <hr>
-      <h5 class="text-muted">Data Partners</h5>
-      <ul class="list-inline text-muted">
-          <li>EmploymentGuide.com</li>
-          <li>AeroTrader.com</li>
-          <li>Homes.com</li>
-          <li>ForRent.com</li>
-          <li>Cycletrader.com</li>
-      </ul>
-      <hr>
-
-      <footer class="text-muted">
-      <small>
-        <p class="pull-left">&copy; Chicken Dinner - Dominion Enterprises 2013</p>
-        <p class="pull-right">Winning data everytime.</p>
-      </small>
-      </footer>
+<?php include 'footer.php' ?>
     </div> <!-- /container -->
 
 

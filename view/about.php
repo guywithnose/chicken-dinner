@@ -23,44 +23,11 @@
   </head>
 
   <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Chicken Dinner LOGO</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+<?php include 'nav.php' ?>
     <div class="container">
     <h2>Hi! We're Chicken Dinner.</h2>
     <p>About us text. Goes here.</p>
-      <hr>
-      <h5 class="text-muted">Data Partners</h5>
-      <ul class="list-inline text-muted">
-          <li>EmploymentGuide.com</li>
-          <li>AeroTrader.com</li>
-          <li>Homes.com</li>
-          <li>ForRent.com</li>
-          <li>Cycletrader.com</li>
-      </ul>
-      <hr>
-
-      <footer class="text-muted">
-      <small>
-        <p class="pull-left">&copy; Chicken Dinner - Dominion Enterprises 2013</p>
-        <p class="pull-right">Winning data everytime.</p>
-      </small>
-      </footer>
+<?php include 'footer.php' ?>
     </div> <!-- /container -->
 
 
