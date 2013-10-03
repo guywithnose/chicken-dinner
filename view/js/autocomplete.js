@@ -1,7 +1,7 @@
 $(function() {
     var issueData;
     $.ajax({
-        url: 'http://www.chickendinner.com/issues.json',
+        url: 'issues.json',
         dataType: 'json',
         success: function(data){
             issueData = data;
