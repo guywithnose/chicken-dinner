@@ -36,7 +36,7 @@ function ready(error, us) {
       .interpolate(d3.interpolateHsl)
       .nice(10)
       .base(2)
-      .range([d3.hsl(210, 1, 0.9), d3.hsl(210, 1, 0.1)]);
+      .range([d3.hsl(210, 1, 0.95), d3.hsl(210, 1, 0.05)]);
 
   g.append("g")
       .attr("class", "counties")
