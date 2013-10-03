@@ -23,7 +23,7 @@ queue()
 
 function ready(error, us) {
   var vehicleCountColor = d3.scale.linear()
-      .domain([0, 1500])
+      .domain([0, d3.quantile(vehicleCounts.values().sort(d3.ascending), 0.98)])
       .interpolate(d3.interpolateHsl)
       .range([d3.hsl(210, 1, 0.8), d3.hsl(210, 1, 0.3)]);
 
