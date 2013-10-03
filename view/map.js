@@ -3,7 +3,7 @@ var width = 960, height = 500, centered;
 var vehicleCounts = d3.map();
 
 var vehicleCountIntensity = d3.scale.linear()
-    .domain([0, 600])
+    .domain([0, 10000])
     .range([0.9, 0.1]);
 
 var path = d3.geo.path();
