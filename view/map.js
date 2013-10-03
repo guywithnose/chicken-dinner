@@ -20,14 +20,14 @@ map.append("rect")
 
 var legend = d3.select("#huge-map").append("svg")
     .attr("id", "legend")
-    .attr("width", 350)
+    .attr("width", "100%")
     .attr("height", 50);
 
 var g = map.append("g");
 
 queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "cyclemake.php?class=Motorcycle&make=Harley-Davidson", function(d) { vehicleCounts.set(d.zip, +d.data); })
+    .defer(d3.csv, "cyclemake.php?class=Motorcycle&make=Honda", function(d) { vehicleCounts.set(d.zip, +d.data); })
     .await(ready);
 
 function ready(error, us) {
@@ -43,7 +43,7 @@ function ready(error, us) {
     .selectAll("path")
       .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
-      .style("fill", function(d) { return vehicleCountColor(vehicleCounts.get(d.id)); })
+      .style("fill", function(d) { return vehicleCountColor(+vehicleCounts.get(d.id)); })
       .attr("d", path);
 
   g.append("g")
