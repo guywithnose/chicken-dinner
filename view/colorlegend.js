@@ -15,7 +15,7 @@
 
 var colorlegend = function (target, scale, type, options) {
 
-  var scaleTypes = ['linear', 'quantile', 'ordinal']
+  var scaleTypes = ['linear', 'quantile', 'ordinal', 'log']
     , found = false
     , opts = options || {}
     , boxWidth = opts.boxWidth || 20        // width of each box (int)
@@ -28,7 +28,7 @@ var colorlegend = function (target, scale, type, options) {
     , h = htmlElement.offsetHeight          // height of container element
     , colors = []
     , padding = [2, 4, 10, 4]               // top, right, bottom, left
-    , boxSpacing = type === 'ordinal' ? 3 : 0 // spacing between boxes
+    , boxSpacing = type === 'ordinal' ? 10 : 0 // spacing between boxes
     , titlePadding = title ? 11 : 0
     , domain = scale.domain()
     , range = scale.range()    
@@ -61,6 +61,14 @@ var colorlegend = function (target, scale, type, options) {
       colors[i] = scale(min + i * ((max - min) / linearBoxes));
     }
   }
+  else if (type === 'log') {
+    var ticks = scale.ticks(linearBoxes);
+    linearBoxes = ticks.length;
+    for (i = 0; i < ticks.length; i++) {
+      domain[i] = ticks[i];
+      colors[i] = scale(ticks[i]);
+    }
+  }
   
   // check the width and height and adjust if necessary to fit in the element
   // use the range if quantile
@@ -91,13 +99,13 @@ var colorlegend = function (target, scale, type, options) {
       .attr('class', 'colorlegend-labels')
       .attr('dy', '.71em')
       .attr('x', function (d, i) {
-        return i * (boxWidth + boxSpacing) + (type !== 'ordinal' ? (boxWidth / 2) : 0);
+        return i * (boxWidth + boxSpacing) + ((type !== 'ordinal' && type !== 'log') ? (boxWidth / 2) : 0);
       })
       .attr('y', function () {
         return boxHeight + 2;
       })
       .style('text-anchor', function () {
-        return type === 'ordinal' ? 'start' : 'middle';
+        return (type === 'ordinal' || type === 'log') ? 'start' : 'middle';
       })
       .style('pointer-events', 'none')
       .text(function (d, i) {
