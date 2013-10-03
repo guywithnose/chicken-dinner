@@ -27,10 +27,29 @@
 <?php include 'nav.php' ?>
     <div class="jumbotron">
     <div class="container">
+        
+        
+        <!----incorrect type ahead/ autocorrect  look ---->
+        <div class="input-group input-group-lg">
+        <input type="text" value="Enter a keyword" class="form-control" id="searchBarInput" >
+        <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
+        </div>
+        <!---- end incorrect type ahead/ autocorrect  look ---->
+        
+        <!----correct input look ---->
+        <br>
         <div class="input-group input-group-lg">
         <input type="text" value="Enter a keyword" class="form-control">
         <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
         </div>
+        <!----end correct look ---->
+        
+        <!--<select class="main-drop">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select> -->
         
         <div id="huge-map" class="huge-map panel"></div>
              
@@ -92,18 +111,4 @@
         </div>
       </div>
 <?php include 'footer.php' ?>
-    </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap-3.0.0/assets/js/jquery.js"></script>
-    <script src="bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
-    <script src="/colorlegend.js"></script>
-    <script src="/map.js"></script>
-  </body>
-</html>
