@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="bootstrap-3.0.0/assets/ico/favicon.png">
 
-    <title>Chicken Dinner - About</title>
+    <title>We like our Chicken Dinner Data Baked</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
@@ -25,7 +25,13 @@
   <body>
 <?php include 'nav.php' ?>
     <div class="container">
-    <h2>Hi! We're Chicken Dinner.</h2>
-    <p>About us text. Goes here.</p>
+    <h1>We Like Our Data Baked...</h1>
+    <h2>Just like our Chicken Dinner</h2>
+    <p>To make your Data tender and juicy, be sure to add a little Heat. </p> 
+    <p>Question: Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
+    The answer... NO ONE!</p>
+    <p>By Heat Mapping your data across the U.S. you can actually visualize the information and come up with reasonable hypotheses.  <br />
+    Don't believe us? '
+    </p>
 <?php include 'footer.php' ?>
  
