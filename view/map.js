@@ -27,7 +27,7 @@ var g = map.append("g");
 
 queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "cyclemake.php?class=Motorcycle&make=Honda", function(d) { vehicleCounts.set(d.zip, +d.data); })
+    .defer(d3.csv, "cycle.csv", function(d) { vehicleCounts.set(d.zip, +d.data); })
     .await(ready);
 
 function ready(error, us) {
