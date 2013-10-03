@@ -3,8 +3,8 @@ var width = 960, height = 500, centered;
 var vehicleCounts = d3.map();
 
 var vehicleCountIntensity = d3.scale.linear()
-    .domain([0, 10000])
-    .range([0.9, 0.1]);
+    .domain([0, 1500])
+    .range([0.8, 0.3]);
 
 var path = d3.geo.path();
 
@@ -22,7 +22,7 @@ var g = svg.append("g");
 
 queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "cycle.csv", function(d) { vehicleCounts.set(d.zip, +d.data); })
+    .defer(d3.csv, "cycle.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
 function ready(error, us) {
