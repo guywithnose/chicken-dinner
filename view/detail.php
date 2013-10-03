@@ -47,13 +47,4 @@
       </ul>
 
 <?php include 'footer.php' ?>
-    </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap-3.0.0/assets/js/jquery.js"></script>
-    <script src="bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
