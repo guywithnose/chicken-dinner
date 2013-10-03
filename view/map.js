@@ -32,19 +32,25 @@ function ready(error, us) {
       .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
       .style("fill", function(d) { return d3.hsl(210, 1, vehicleCountIntensity(vehicleCounts.get(d.id))); })
+      .attr("d", path);
+
+  g.append("g")
+      .attr("class", "states")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
       .attr("d", path)
-      .on("click", mapClick);
+      .on("click", mapClick)
+      .on("mouseover", function() { d3.select(this).attr("class", "states active"); })
+      .on("mouseout", function() { d3.select(this).attr("class", "states"); });
 
   g.append("path")
       .datum(topojson.mesh(us, us.objects.states))
-      .attr("class", "states")
-      .attr("d", path)
-      .on("click", mapClick);
+      .attr("class", "state-borders")
+      .attr("d", path);
 }
 
 function mapClick(d) {
-console.log('foo');
-console.log(d);
   var x, y, k;
 
   if (d && centered !== d) {
