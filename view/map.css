@@ -1,7 +1,6 @@
 .counties {
   fill: none;
-  //stroke: #000;
-  //stroke-width: 0.08px;
+  pointer-events: all;
 }
 
 .states {
@@ -9,4 +8,9 @@
   stroke: #000;
   stroke-width: 0.5px;
   stroke-linejoin: round;
+}
+
+.background {
+  pointer-events: all;
+  fill: none;
 }
