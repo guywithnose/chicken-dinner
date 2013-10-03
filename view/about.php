@@ -36,6 +36,9 @@
     <p>Question 2:  Don't believe us?<br />
     Get a Taste by trying it yourself!</p>
     
+    <div style="float:right;">
+      <img src="/images/chickendinner.png" style="width:350px; margin-right: 150px;">
+    </div>
     <h2>We also like our Chicken Dinner Baked!</h2>
     <div>
       <ul>
@@ -46,9 +49,6 @@
         <li>Matt Strapko - Dev</li>
         <li>Spencer Reinhart - Dev</li>
       </ul>
-    </div>
-    <div style="float:right;">
-      <img src="/images/chickendinner.png"
     </div>
     
     <h2>Don't forget our special ingredients!</h2>
