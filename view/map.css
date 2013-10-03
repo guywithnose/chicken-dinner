@@ -25,3 +25,7 @@
   pointer-events: all;
   fill: none;
 }
+
+.colorlegend-title {
+  font-size: 1.5em;
+}
