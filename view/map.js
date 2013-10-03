@@ -2,10 +2,6 @@ var width = 960, height = 500, centered;
 
 var vehicleCounts = d3.map();
 
-var vehicleCountIntensity = d3.scale.linear()
-    .domain([0, 1500])
-    .range([0.8, 0.3]);
-
 var path = d3.geo.path();
 
 var svg = d3.select("#huge-map").append("svg")
@@ -26,12 +22,17 @@ queue()
     .await(ready);
 
 function ready(error, us) {
+  var vehicleCountColor = d3.scale.linear()
+      .domain([0, d3.quantile(vehicleCounts.values().sort(d3.ascending), 0.98)])
+      .interpolate(d3.interpolateHsl)
+      .range([d3.hsl(210, 1, 0.8), d3.hsl(210, 1, 0.3)]);
+
   g.append("g")
       .attr("class", "counties")
     .selectAll("path")
       .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
-      .style("fill", function(d) { return d3.hsl(210, 1, vehicleCountIntensity(vehicleCounts.get(d.id))); })
+      .style("fill", function(d) { return vehicleCountColor(vehicleCounts.get(d.id)); })
       .attr("d", path);
 
   g.append("g")
