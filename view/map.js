@@ -2,7 +2,11 @@ var width = 960, height = 500, centered;
 
 var vehicleCounts = d3.map();
 
-var path = d3.geo.path();
+var projection = d3.geo.albersUsa()
+    .scale(width)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path().projection(projection);
 
 var svg = d3.select("#huge-map").append("svg")
     .attr("width", width)
@@ -55,10 +59,10 @@ function mapClick(d) {
   var x, y, k;
 
   if (d && centered !== d) {
-    var centroid = path.centroid(d);
+    var centroid = path.centroid(d), bounds = path.bounds(d);
     x = centroid[0];
     y = centroid[1];
-    k = 4;
+    k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
     centered = d;
   } else {
     x = width / 2;
@@ -72,6 +76,5 @@ function mapClick(d) {
 
   g.transition()
       .duration(750)
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-      .style("stroke-width", 1.5 / k + "px");
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 }
