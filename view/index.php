@@ -15,6 +15,9 @@
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
     <link href="map.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,18 +31,10 @@
     <div class="jumbotron">
     <div class="container">
         
-        
-        <!----incorrect type ahead/ autocorrect  look ---->
-        <div class="input-group input-group-lg">
-        <input type="text" value="Enter a keyword" class="form-control" id="searchBarInput" >
-        <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
-        </div>
-        <!---- end incorrect type ahead/ autocorrect  look ---->
-        
         <!----correct input look ---->
         <br>
         <div class="input-group input-group-lg">
-        <input type="text" value="Enter a keyword" class="form-control">
+        <input type="text" value="Enter a keyword" class="form-control" id="keyword">
         <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
         </div>
         <!----end correct look ---->
