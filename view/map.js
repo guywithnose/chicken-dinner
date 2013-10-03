@@ -59,10 +59,10 @@ function mapClick(d) {
   var x, y, k;
 
   if (d && centered !== d) {
-    var centroid = path.centroid(d);
+    var centroid = path.centroid(d), bounds = path.bounds(d);
     x = centroid[0];
     y = centroid[1];
-    k = 4;
+    k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
     centered = d;
   } else {
     x = width / 2;
