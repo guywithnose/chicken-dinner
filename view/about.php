@@ -37,14 +37,19 @@
     Get a Taste by trying it yourself!</p>
     
     <h2>We also like our Chicken Dinner Baked!</h2>
-    <ul>
-      <li>Anthony Bittle - Dev</li>
-      <li>Brandon Beigay - Pro Dev/UI</li>
-      <li>Chris Ryan - Dev</li>
-      <li>Lucien Frelin - UI
-      <li>Matt Strapko - Dev</li>
-      <li>Spencer Reinhart - Dev</li>
-    </ul>
+    <div>
+      <ul>
+        <li>Anthony Bittle - Dev</li>
+        <li>Brandon Beigay - Pro Dev/UI</li>
+        <li>Chris Ryan - Dev</li>
+        <li>Lucien Frelin - UI
+        <li>Matt Strapko - Dev</li>
+        <li>Spencer Reinhart - Dev</li>
+      </ul>
+    </div>
+    <div style="float:right;">
+      <img src="/images/chickendinner.png"
+    </div>
     
     <h2>Don't forget our special ingredients!</h2>
     <ul>
