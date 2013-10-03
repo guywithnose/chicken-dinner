@@ -18,6 +18,11 @@ map.append("rect")
     .attr("height", height)
     .on("click", mapClick);
 
+var legend = d3.select("#huge-map").append("svg")
+    .attr("id", "legend")
+    .attr("width", 225)
+    .attr("height", 50);
+
 var g = map.append("g");
 
 queue()
@@ -29,6 +34,7 @@ function ready(error, us) {
   var vehicleCountColor = d3.scale.linear()
       .domain([0, d3.quantile(vehicleCounts.values().sort(d3.ascending), 0.98)])
       .interpolate(d3.interpolateHsl)
+      .nice(9)
       .range([d3.hsl(210, 1, 0.8), d3.hsl(210, 1, 0.3)]);
 
   g.append("g")
@@ -53,6 +59,8 @@ function ready(error, us) {
       .datum(topojson.mesh(us, us.objects.states))
       .attr("class", "state-borders")
       .attr("d", path);
+
+  colorlegend("#legend", vehicleCountColor, "linear", {title: "# of motorcycles for sale"});
 }
 
 function mapClick(d) {
