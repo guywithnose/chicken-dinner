@@ -2,7 +2,11 @@ var width = 960, height = 500, centered;
 
 var vehicleCounts = d3.map();
 
-var path = d3.geo.path();
+var projection = d3.geo.albersUsa()
+    .scale(width)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path().projection(projection);
 
 var svg = d3.select("#huge-map").append("svg")
     .attr("width", width)
