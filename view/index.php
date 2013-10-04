@@ -48,40 +48,11 @@
         
         <div id="huge-map" class="huge-map panel"></div>
              
-        <a class="btn btn-primary btn-lg" data-toggle="collapse" data-parent="#accordion" href="#collapse-data-more">
+        <a id="tableToggle" class="btn btn-primary btn-lg" data-toggle="collapse" data-parent="#accordion" href="#collapse-data-more">
         Learn More About This Data
         </a>
         <div id="collapse-data-more" class="collapse">
-        <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td><a href="detail.php">Detail Page Link</a></td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-        </table>
+            <div id="dataTable" />
         </div>
     </div>
     </div>

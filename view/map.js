@@ -62,6 +62,10 @@ function ready(error, us) {
       .attr("d", path);
 
   colorlegend("#legend", vehicleCountColor, "log", {title: "# of motorcycles for sale"});
+
+  if ($('#collapse-data-more').is(':visible')) {
+      generateChart();
+  }
 }
 
 function mapClick(d) {
