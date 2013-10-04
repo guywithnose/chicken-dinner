@@ -50,6 +50,9 @@
         <a id="tableToggle" class="btn btn-primary btn-lg" data-toggle="collapse" data-parent="#accordion" href="#collapse-data-more">
         Learn More About This Data
         </a>
+        <a id="popMap" class="btn btn-primary btn-lg" style="float:right;">
+        Compare with population density
+        </a>
         <div id="collapse-data-more" class="collapse">
             <div id="dataTable" />
         </div>
