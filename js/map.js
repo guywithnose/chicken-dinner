@@ -1,6 +1,6 @@
 var width = 960, height = 500, centered;
 
-var vehicleCounts = d3.map();
+var vehicleCounts = d3.map(), fipsCodes = d3.map(), stateMap = d3.map();
 
 var projection = d3.geo.albersUsa()
     .scale(width)
@@ -10,12 +10,20 @@ var path = d3.geo.path().projection(projection);
 
 queue()
     .defer(d3.json, "data/us.json")
+    .defer(d3.csv, "data/US_FIPS_Codes.csv", function(d) {
+      fipsCodes.set(d.stateNumber.replace(/^0/, '') + d.countyNumber, {
+        stateName: d.state,
+        stateNumber: d.stateNumber,
+        countyName: d.county
+      });
+    })
     .defer(d3.csv, "cyclemake.php?class=Motorcycle&make=", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
 var map, legend, g, legendTitle = "# of motorcycles for sale";
 
 function ready(error, us) {
+  us = us[0];
   $("#huge-map").html("");
   map = d3.select("#huge-map").append("svg")
       .attr("width", width)
@@ -42,32 +50,65 @@ function ready(error, us) {
       .range([d3.hsl(210, 1, 0.95), d3.hsl(210, 1, 0.05)]);
 
   g.append("g")
-      .attr("class", "counties")
-    .selectAll("path")
-      .data(topojson.feature(us, us.objects.counties).features)
-    .enter().append("path")
-      .style("fill", function(d) { return vehicleCountColor(+vehicleCounts.get(d.id)); })
-      .attr("d", path);
-
-  g.append("g")
       .attr("class", "states")
     .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
       .attr("d", path)
+      .attr("stateId", function(d) { stateMap.set(d.id, d); return d.id; });
+
+  g.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .style("fill", function(d) { return vehicleCountColor(+vehicleCounts.get(d.id)); })
+      .attr("d", path)
+      .attr("stateId", function(d) {
+        var fips = fipsCodes.get(d.id);
+        return fips ? fips.stateNumber.replace(/^0/, '') : null;
+      })
+      .attr("countyId", function(d) { return d.id; })
       .on("click", mapClick)
       .on("mouseover", function() {
-        var element = d3.select(this);
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "states zoomed") {
-          element.attr("class", "states active");
+        if (elementClass !== "counties stateZoomed") {
+          element.attr("class", "counties stateActive");
         }
       })
       .on("mouseout", function() {
-        var element = d3.select(this);
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "states zoomed") {
-          element.attr("class", centered ? "states inactive" : "states");
+        if (elementClass !== "counties stateZoomed") {
+          element.attr("class", centered ? "counties stateInactive" : "counties");
+        }
+      });
+
+  g.append("g")
+      .attr("class", "countiesOverlay")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("stateId", function(d) {
+        var fips = fipsCodes.get(d.id);
+        return fips ? fips.stateNumber.replace(/^0/, '') : null;
+      })
+      .attr("countyId", function(d) { return d.id; })
+      .on("click", mapClick)
+      .on("mouseover", function() {
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
+        var elementClass = element.attr("class");
+        if (elementClass !== "counties stateZoomed") {
+          element.attr("class", "counties stateActive");
+        }
+      })
+      .on("mouseout", function() {
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
+        var elementClass = element.attr("class");
+        if (elementClass !== "counties stateZoomed") {
+          element.attr("class", centered ? "counties stateInactive" : "counties");
         }
       });
 
@@ -85,21 +126,23 @@ function ready(error, us) {
 
 function mapClick(d) {
   var x, y, k;
+  var stateId = d3.select(this).attr("stateId");
+  var state = stateMap.get(stateId);
 
-  if (d && centered !== d) {
-    var centroid = path.centroid(d), bounds = path.bounds(d);
+  if (d && centered !== state) {
+    var centroid = path.centroid(state), bounds = path.bounds(state);
     x = centroid[0];
     y = centroid[1];
     k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
-    centered = d;
-    d3.selectAll(".states").attr("class", "states inactive");
-    d3.select(this).attr("class", "states zoomed");
+    centered = state;
+    d3.selectAll('.counties[stateId^="' + stateId + '"]').attr("class", "counties stateInactive");
+    d3.selectAll('.counties[stateId="' + stateId + '"]').attr("class", "counties stateZoomed");
   } else {
     x = width / 2;
     y = height / 2;
     k = 1;
     centered = null;
-    d3.selectAll(".states").attr("class", "states");
+    d3.selectAll(".counties").attr("class", "counties");
   }
 
   g.transition()
