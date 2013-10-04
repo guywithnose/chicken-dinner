@@ -30,23 +30,24 @@
     
     <p>By Heat Mapping your data across the U.S. you can actually visualize the information and come up with reasonable hypotheses.</p>
     
-    <p>Question 1: Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
+    <p><span style="font-weight:bold;">Question 1:</span> Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
     The answer... NO ONE!</p>
     
-    <p>Question 2:  Don't believe us?<br />
+    <p><span style="font-weight:bold;">Question 2:</span>  Don't believe us?<br />
     Get a Taste by trying it yourself!</p>
     
     <div style="float:right;">
-      <img src="/images/chickendinner.png" style="width:350px; margin-right: 150px;">
+      <img src="images/chickendinner.png" style="width:350px; margin-right: 150px;">
     </div>
     <h2>We also like our Chicken Dinner Baked!</h2>
     <div>
       <ul>
         <li>Anthony Bittle - Dev</li>
-        <li>Brandon Beigay - Pro Dev/UI</li>
+        <li>Brandon Beigay - Product/UI</li>
         <li>Chris Ryan - Dev</li>
-        <li>Lucien Frelin - UI
+        <li>Lucien Frelin - UI/Product</li>
         <li>Matt Strapko - Dev</li>
+        <li>Reese Howell - UI</li>
         <li>Spencer Reinhart - Dev</li>
       </ul>
     </div>
@@ -54,17 +55,16 @@
     <h2>Don't forget our special ingredients!</h2>
     <ul>
       <li>Programmed using PHP 5.4, Javascript, & CSS/HTML</li>
-      <li>Map - GeoJSON & D3.js</li>
+      <li>Map - GeoJSON, U.S. Atlas TopoJSON, & D3.js</li>
+      <li>Charts - Google Charts API</li>
       <li>Aero, Cycle (ATV, PWC, Snow), RV, Truck & Equipment Data - TOL API</li>
       <li>Job data - Employment Guide API</li>
-      <li>Income Data - </li>
-      <li>Rent Data - </li>
-      <li></li>
+      <li>Income, Rent, & Demographic Data - 2000 Census*</li>
       <li>Data Storage - Bug.ly API</li>
       <li>UI - Twitter Bootstrap (Jumbotron Theme), Jquery UI</li>
       <li>Find Us on GitHub & Heroku</li>
+      <span style="font-style:italic;">* Census Data APIs are unavailable due to Government Shutdown!</span>
     </ui>
       
       
 <?php include 'footer.php' ?>
- 
