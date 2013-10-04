@@ -16,10 +16,10 @@ queue()
         countyName: d.county
       });
     })
-    .defer(d3.csv, "cyclemake.php?class=Motorcycle&make=", function(d) { vehicleCounts.set(d.fips, +d.data); })
+    .defer(d3.csv, "cyclemake.php?class=Jobs&make=", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
-var map, legend, g, legendTitle = "# of motorcycles for sale";
+var map, legend, g, legendTitle = "# of jobs available";
 
 var lastUs;
 
