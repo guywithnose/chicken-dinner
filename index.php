@@ -45,7 +45,7 @@
           <option value="audi">Audi</option>
         </select> -->
 
-        <div id="huge-map" class="huge-map panel"></div>
+        <div id="huge-map" class="huge-map panel"><div class="loading">&nbsp;</div></div>
 
         <a id="tableToggle" class="btn btn-primary btn-lg" data-toggle="collapse" data-parent="#accordion" href="#collapse-data-more">
         Learn More About This Data
