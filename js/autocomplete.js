@@ -32,23 +32,31 @@ $(function() {
                 }
             }
 
-            $( "#keyword" ).autocomplete({
+            $("#keyword").autocomplete({
                 source: availableTags,
                 select: function(event, ui) {
                     var value = ui.item.value;
-                    if (value.search(' ') != -1) {
-                        var className = value.substr(0, value.search(' '));
-                        var make = value.substr(value.search(' ') + 1);
-                        legendTitle = tagToLegendMap[value];
-                        if (issueData[className] && issueData[className][make]) {
-                            $('#huge-map').html('<div class="loading">&nbsp;</div>');
-                            vehicleCounts = d3.map();
-                            queue().defer(d3.json, "data/us.json")
-                                .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.fips, +d.data); })
-                                .await(ready);
-                        }
+                    autoSelect(value);
+                }
+            });
+
+            function autoSelect(value) {
+                if (value.search(' ') != -1) {
+                    var className = value.substr(0, value.search(' '));
+                    var make = value.substr(value.search(' ') + 1);
+                    legendTitle = tagToLegendMap[value];
+                    if (issueData[className] && issueData[className][make]) {
+                        $('#huge-map').html('<div class="loading">&nbsp;</div>');
+                        vehicleCounts = d3.map();
+                        queue().defer(d3.json, "data/us.json")
+                            .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.fips, +d.data); })
+                            .await(ready);
                     }
                 }
+            }
+
+            $('.input-group-btn').click(function(){
+                autoSelect($("#keyword").val());
             });
         }
     });
