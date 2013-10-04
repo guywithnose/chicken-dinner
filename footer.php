@@ -1,6 +1,8 @@
+</div> <!-- /container -->
+</div> <!--  /jumbotron -->
 <hr>
-<h5 class="text-muted">Data Partners</h5>
-<ul class="list-inline text-muted">
+<h5 class="text-muted footer">Data Partners</h5>
+<ul class="list-inline text-muted footer">
   <li>EmploymentGuide.com</li>
   <li>AeroTrader.com</li>
   <li>CycleTrader.com</li>
@@ -10,14 +12,13 @@
   <li>2000 Census Data</li>
 </ul>
 <hr>
-<footer class="text-muted clearfix">
+<footer class="text-muted clearfix footer">
 <p class="pull-left"><small>&copy; DataBake - Dominion Enterprises 2013</small></p>
 <p class="pull-right"><small>Just Add Heat!</small></p>
 </footer>
 <hr>
 <div class="text-center"><a href="about.php"><img src="images/formula.png"></a></div>
 
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

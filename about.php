@@ -62,9 +62,9 @@
       <li>Income, Rent, & Demographic Data - 2000 Census*</li>
       <li>Data Storage - Bug.ly API</li>
       <li>UI - Twitter Bootstrap (Jumbotron Theme), Jquery UI</li>
-      <li>Find Us on GitHub & Heroku</li>
-      <span style="font-style:italic;">* Census Data APIs are unavailable due to Government Shutdown!</span>
-    </ui>
+      <li>Find Us on GitHub & Heroku<br />
+      <span style="font-style:italic;">* Census Data APIs are unavailable due to Government Shutdown!</span></li>
+    </ul>
 
 
 <?php include 'footer.php' ?>

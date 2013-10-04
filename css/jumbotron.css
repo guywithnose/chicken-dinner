@@ -39,50 +39,8 @@ body {
     increase the subtrahend in the calc() operation */
     margin: calc(100% - 95%) auto 0;
 }
+.footer {
+    max-width:970px;
+    margin: 0 auto 1em;
+}
 
-
- /* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-    .huge-map{
-        min-height:auto;
-        min-width:95%;
-        width:100%;
-        margin-top:25px;
-        border:1px solid #ddd;
-        padding:20px 10px;
-    }
-    svg {
-        width: 100%;
-        height: auto;
-    }
-    .container {
-        width: 98%;
-    }
-}
- 
-/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-    .huge-map{
-        min-height:auto;
-        min-width:95%;
-        width:100%;
-        margin-top:25px;
-        border:1px solid #ddd;
-        padding:20px 10px;
-    }
-    .navbar {
-        height: 50px;
-    }
-}
- 
-/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 479px) {
-    .huge-map{
-        min-height:auto;
-        min-width:95%;
-        width:100%;
-        margin-top:25px;
-        border:1px solid #ddd;
-        padding:20px 10px;
-    }
-}
