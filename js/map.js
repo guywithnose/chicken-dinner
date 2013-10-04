@@ -68,22 +68,7 @@ function ready(error, us) {
         var fips = fipsCodes.get(d.id);
         return fips ? fips.stateNumber.replace(/^0/, '') : null;
       })
-      .attr("countyId", function(d) { return d.id; })
-      .on("click", mapClick)
-      .on("mouseover", function() {
-        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
-        var elementClass = element.attr("class");
-        if (elementClass !== "counties stateZoomed") {
-          element.attr("class", "counties stateActive");
-        }
-      })
-      .on("mouseout", function() {
-        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
-        var elementClass = element.attr("class");
-        if (elementClass !== "counties stateZoomed") {
-          element.attr("class", centered ? "counties stateInactive" : "counties");
-        }
-      });
+      .attr("countyId", function(d) { return d.id; });
 
   g.append("g")
       .attr("class", "countiesOverlay")
@@ -100,15 +85,15 @@ function ready(error, us) {
       .on("mouseover", function() {
         var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "counties stateZoomed") {
-          element.attr("class", "counties stateActive");
+        if (elementClass !== "countiesOverlay stateZoomed") {
+          element.attr("class", "countiesOverlay stateActive");
         }
       })
       .on("mouseout", function() {
         var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "counties stateZoomed") {
-          element.attr("class", centered ? "counties stateInactive" : "counties");
+        if (elementClass !== "countiesOverlay stateZoomed") {
+          element.attr("class", centered ? "countiesOverlay stateInactive" : "countiesOverlay");
         }
       });
 
@@ -135,14 +120,14 @@ function mapClick(d) {
     y = centroid[1];
     k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
     centered = state;
-    d3.selectAll('.counties[stateId^="' + stateId + '"]').attr("class", "counties stateInactive");
-    d3.selectAll('.counties[stateId="' + stateId + '"]').attr("class", "counties stateZoomed");
+    d3.selectAll('.countiesOverlay:not([stateId="' + stateId + '"])').attr("class", "countiesOverlay stateInactive");
+    d3.selectAll('.countiesOverlay[stateId="' + stateId + '"]').attr("class", "countiesOverlay stateZoomed");
   } else {
     x = width / 2;
     y = height / 2;
     k = 1;
     centered = null;
-    d3.selectAll(".counties").attr("class", "counties");
+    d3.selectAll(".countiesOverlay").attr("class", "countiesOverlay");
   }
 
   g.transition()
