@@ -21,8 +21,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
     <script src="bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
     <script src="js/autocomplete.js"></script>
+    <script src="js/tableChart.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
