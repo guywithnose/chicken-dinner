@@ -30,4 +30,4 @@ body {
 }
 
 .loading {
-    background: #fff url("images/loading.gif") 50% 50% no-repeat;
+    background: #fff url("/images/loading.gif") 50% 50% no-repeat;
