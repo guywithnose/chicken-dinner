@@ -98,4 +98,20 @@ $(function() {
             });
         }
     });
+
+    $('#popMap').click(function(){
+        if ($(this).hasClass('btn-primary')) {
+            $(this).removeClass('btn-primary')
+            $(this).addClass('btn-default')
+            if (lastUs && legendTitle.search('households') == -1) {
+                ready(null, lastUs);
+            }
+        } else {
+            $(this).addClass('btn-primary')
+            $(this).removeClass('btn-default')
+            if (lastUs && legendTitle.search('households') == -1) {
+                ready(null, lastUs);
+            }
+        }
+    });
 });

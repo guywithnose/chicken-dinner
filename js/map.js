@@ -78,7 +78,7 @@ function ready(error, us) {
     .selectAll("path")
       .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
-      .style("fill", function(d) { var count = vehicleCounts.get(d.id); return vehicleCountColor(count ? count : 0); })
+      .style("fill", function(d) { var count = getFipData(d.id); return vehicleCountColor(count ? count : 0); })
       .attr("d", path)
       .attr("stateId", function(d) {
         var fips = fipsCodes.get(d.id);
@@ -103,7 +103,7 @@ function ready(error, us) {
         var elementClass = element.attr("class");
         if (elementClass === "countiesOverlay stateZoomed") {
           var county = fipsCodes.get(d.id);
-          var count = vehicleCounts.get(d.id);
+          var count = getFipData(d.id);
           count = count ? count : 0;
 
           tooltip.transition()
@@ -140,6 +140,25 @@ function ready(error, us) {
   if ($('#collapse-data-more').is(':visible')) {
       generateChart();
   }
+
+  if (legendTitle.search('households') == -1) {
+      $('#popMap').show();
+  } else {
+      $('#popMap').hide();
+  }
+}
+
+function getFipData(fipNum)
+{
+    if ($('#popMap').hasClass('btn-primary') || $.isEmptyObject(popData) || legendTitle.search('households') != -1) {
+        return vehicleCounts.get(fipNum);
+    }
+
+    if (vehicleCounts.get(fipNum) >= 30) {
+        return 0;
+    } else {
+        return popData[fipNum] / vehicleCounts.get(fipNum);
+    }
 }
 
 function mapClick(d) {
@@ -171,6 +190,16 @@ function mapClick(d) {
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 }
+
+var popData = {};
+$(function(){
+   d3.csv('data/income-fips.csv', function(d){
+       for (var i in d) {
+           var data = d[i];
+           popData[data.fips] = data['Total Households'];
+       }
+   });
+});
 
 $(window).resize(function(){
     if (lastUs) {
