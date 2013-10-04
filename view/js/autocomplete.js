@@ -5,23 +5,40 @@ $(function() {
         dataType: 'json',
         success: function(data){
             issueData = data;
-            var availableTags = [
-            ];
+            var availableTags = [];
+            var tagToLegendMap = {};
+            var vehicleMapper = function(type) { return function() { return '# of ' + type + ' for sale'; }; };
+            var classToTypeMap = {
+              'Trucks': vehicleMapper('trucks'),
+              'Equipment': vehicleMapper('equipment'),
+              'RV': vehicleMapper('rvs'),
+              'Aircraft': vehicleMapper('aircraft'),
+              'Motorcycle': vehicleMapper('motorcycles'),
+              'ATV': vehicleMapper('atvs'),
+              'PWC': vehicleMapper('pwcs'),
+              'Snowmobile': vehicleMapper('snowmobiles')
+            };
 
             for (var i in data) {
                 for (var j in data[i]) {
+                    var legendText = '# of ' + i + ' for sale';
+                    if (classToTypeMap[i]) {
+                      legendText = classToTypeMap[i](j);
+                    }
+
                     availableTags.push(i + ' ' + j);
+                    tagToLegendMap[i + ' ' + j] = legendText;
                 }
             }
 
             $( "#keyword" ).autocomplete({
                 source: availableTags,
                 select: function(event, ui) {
-                    console.log(ui.item.value);
                     var value = ui.item.value;
                     if (value.search(' ') != -1) {
                         var className = value.substr(0, value.search(' '));
                         var make = value.substr(value.search(' ') + 1);
+                        legendTitle = tagToLegendMap[value];
                         if (issueData[className] && issueData[className][make]) {
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
