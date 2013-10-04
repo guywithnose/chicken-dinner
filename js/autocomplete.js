@@ -22,6 +22,7 @@ $(function() {
 
             var incomeRanges = ["0-10k","10-15k","15-20k","20-25k","25-30k","30-35k","35-40k","40-45k","45-50k","50-60k","60-75k","75-100k","100-125k","125-150k","150-200k"];
             var rentRanges = ["0-100","100-150","150-200","200-250","250-300","300-350","350-400","400-450","450-500","500-550","550-600","600-650","650-700","700-750","750-800","800-900","900-1000","1000-1250","1250-1500","1500-2000","2000+"];
+            var otherData = ["Population","Housing Units","Water Area"];
 
             for (var i in incomeRanges) {
                 availableTags.push('Households that make $' + incomeRanges[i]);
@@ -31,7 +32,11 @@ $(function() {
                 availableTags.push('Rental fees of $' + rentRanges[i]);
             }
 
-            availableTags.push('Population Density');
+            for (var i in otherData) {
+                availableTags.push(otherData[i]);
+            }
+
+            availableTags.push('Total Households');
 
             for (var i in data) {
                 for (var j in data[i]) {
@@ -65,7 +70,7 @@ $(function() {
                             .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.fips, +d.data); })
                             .await(ready);
                     } else {
-                        if (value == 'Population Density') {
+                        if (value == 'Total Households') {
                             legendTitle = '# of households';
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
@@ -87,6 +92,13 @@ $(function() {
                             vehicleCounts = d3.map();
                             queue().defer(d3.json, "data/us.json")
                                 .defer(d3.csv, "data/rent-fips.csv", function(d) { vehicleCounts.set(d.fips, +d[rentalRange]); })
+                                .await(ready);
+                        } else if ($.inArray(value, otherData)) {
+                            legendTitle = value;
+                            $('#huge-map').html('<div class="loading">&nbsp;</div>');
+                            vehicleCounts = d3.map();
+                            queue().defer(d3.json, "data/us.json")
+                                .defer(d3.csv, "data/fipdata.csv", function(d) { vehicleCounts.set(d.fips, +d[value]); })
                                 .await(ready);
                         }
                     }
