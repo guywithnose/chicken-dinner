@@ -30,9 +30,13 @@ function generateChart() {
         var rows = [];
         var keys = vehicleCounts.keys();
         for (var i in keys) {
-            var key = keys[i];
-            var count = vehicleCounts.get(key.replace(/^0*/, ''));
-            var fips = fipsData[''+key];
+            var fiveKey = key = keys[i];
+            while (fiveKey.length < 5) {
+                fiveKey = '0' + fiveKey;
+            }
+
+            var count = vehicleCounts.get(key);
+            var fips = fipsData[''+fiveKey];
             if (fips) {
                 rows.push([fips.State, fips.County, count]);
             }
