@@ -32,7 +32,6 @@
     <div class="container">
 
         <!----correct input look ---->
-        <br>
         <div class="input-group input-group-lg">
         <input type="text" value="" placeholder="Enter a keyword" class="form-control" id="keyword">
         <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
@@ -63,17 +62,17 @@
         <div class="col-lg-4">
           <h2>Visualize Data</h2>
           <p>Learn more from your spreadsheets and lists. Make huge data more meaningful. Analyze country wide data in moments.</p>
-          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="about.php">View details &raquo;</a></p>
         </div>
         <div class="col-lg-4">
           <h2>Target opportunities</h2>
           <p>Zero in on the best salaries, job markets, etc. Find the best place to move your family. Discover where your best client prospects are</p>
-          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="about.php">View details &raquo;</a></p>
        </div>
         <div class="col-lg-4">
           <h2>Predict new markets</h2>
           <p>Know about new areas to operate first. Spend time in the right places. Understand which direction trends are moving.</p>
-          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="about.php">View details &raquo;</a></p>
         </div>
       </div>
 <?php include 'footer.php' ?>
