@@ -10,6 +10,10 @@ $(function() {
     });
     $('#collapse-data-more').on('shown.bs.collapse', function () {
         generateChart();
+        $('#tableToggle').html('Hide this data');
+    });
+    $('#collapse-data-more').on('hidden.bs.collapse', function () {
+        $('#tableToggle').html('Learn More About This Data');
     });
 });
 
