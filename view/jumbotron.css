@@ -28,3 +28,6 @@ body {
     border:1px solid #ddd;
     border-radius:4px;
 }
+
+.loading {
+    background: #fff url("images/loading.gif") 50% 50% no-repeat;
