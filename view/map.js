@@ -8,29 +8,32 @@ var projection = d3.geo.albersUsa()
 
 var path = d3.geo.path().projection(projection);
 
-var map = d3.select("#huge-map").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-map.append("rect")
-    .attr("class", "background")
-    .attr("width", width)
-    .attr("height", height)
-    .on("click", mapClick);
-
-var legend = d3.select("#huge-map").append("svg")
-    .attr("id", "legend")
-    .attr("width", "100%")
-    .attr("height", 50);
-
-var g = map.append("g");
-
 queue()
     .defer(d3.json, "us.json")
     .defer(d3.csv, "cycle.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
+var map, legend, g;
+
 function ready(error, us) {
+  $("#huge-map").html("");
+  map = d3.select("#huge-map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  map.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", mapClick);
+
+  legend = d3.select("#huge-map").append("svg")
+      .attr("id", "legend")
+      .attr("width", "100%")
+      .attr("height", 50);
+
+  g = map.append("g");
+
   var vehicleCountColor = d3.scale.log()
       .domain([1, d3.max(vehicleCounts.values())])
       .interpolate(d3.interpolateHsl)
