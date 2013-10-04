@@ -84,9 +84,6 @@ function mapClick(d) {
     centered = null;
   }
 
-  g.selectAll("path")
-      .classed("active", centered && function(d) { return d === centered; });
-
   g.transition()
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
