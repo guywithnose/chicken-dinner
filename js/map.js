@@ -23,7 +23,6 @@ queue()
 var map, legend, g, legendTitle = "# of motorcycles for sale";
 
 function ready(error, us) {
-  us = us[0];
   $("#huge-map").html("");
   map = d3.select("#huge-map").append("svg")
       .attr("width", width)
