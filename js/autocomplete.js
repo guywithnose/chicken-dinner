@@ -93,7 +93,7 @@ $(function() {
                             queue().defer(d3.json, "data/us.json")
                                 .defer(d3.csv, "data/rent-fips.csv", function(d) { vehicleCounts.set(d.fips, +d[rentalRange]); })
                                 .await(ready);
-                        } else if ($.inArray(value, otherData)) {
+                        } else if ($.inArray(value, otherData) != -1) {
                             legendTitle = value;
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
@@ -102,6 +102,13 @@ $(function() {
                                 .await(ready);
                         }
                     }
+                } else if ($.inArray(value, otherData) != -1) {
+                    legendTitle = value;
+                    $('#huge-map').html('<div class="loading">&nbsp;</div>');
+                    vehicleCounts = d3.map();
+                    queue().defer(d3.json, "data/us.json")
+                        .defer(d3.csv, "data/fipdata.csv", function(d) { vehicleCounts.set(d.fips, +d[value]); })
+                        .await(ready);
                 }
             }
 
