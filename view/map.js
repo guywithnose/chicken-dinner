@@ -53,8 +53,20 @@ function ready(error, us) {
     .enter().append("path")
       .attr("d", path)
       .on("click", mapClick)
-      .on("mouseover", function() { d3.select(this).attr("class", "states active"); })
-      .on("mouseout", function() { d3.select(this).attr("class", "states"); });
+      .on("mouseover", function() {
+        var element = d3.select(this);
+        var elementClass = element.attr("class");
+        if (elementClass !== "states zoomed") {
+          element.attr("class", "states active");
+        }
+      })
+      .on("mouseout", function() {
+        var element = d3.select(this);
+        var elementClass = element.attr("class");
+        if (elementClass !== "states zoomed") {
+          element.attr("class", centered ? "states inactive" : "states");
+        }
+      });
 
   g.append("path")
       .datum(topojson.mesh(us, us.objects.states))
@@ -77,15 +89,15 @@ function mapClick(d) {
     y = centroid[1];
     k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
     centered = d;
+    d3.selectAll(".states").attr("class", "states inactive");
+    d3.select(this).attr("class", "states zoomed");
   } else {
     x = width / 2;
     y = height / 2;
     k = 1;
     centered = null;
+    d3.selectAll(".states").attr("class", "states");
   }
-
-  g.selectAll("path")
-      .classed("active", centered && function(d) { return d === centered; });
 
   g.transition()
       .duration(750)
