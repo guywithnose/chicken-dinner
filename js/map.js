@@ -3,6 +3,10 @@ var vehicleCounts = d3.map(), fipsCodes = d3.map(), stateMap = d3.map();
 
 var width = 960, height = 500, centered, projection, path;
 
+var tooltip = d3.select("body").append("div")
+    .attr("class", "map-tooltip")
+    .style("opacity", 0);
+
 queue()
     .defer(d3.json, "data/us.json")
     .defer(d3.csv, "data/US_FIPS_Codes.csv", function(d) {
@@ -74,7 +78,7 @@ function ready(error, us) {
     .selectAll("path")
       .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
-      .style("fill", function(d) { return vehicleCountColor(+vehicleCounts.get(d.id)); })
+      .style("fill", function(d) { var count = vehicleCounts.get(d.id); return vehicleCountColor(count ? count : 0); })
       .attr("d", path)
       .attr("stateId", function(d) {
         var fips = fipsCodes.get(d.id);
@@ -94,10 +98,23 @@ function ready(error, us) {
       })
       .attr("countyId", function(d) { return d.id; })
       .on("click", mapClick)
-      .on("mouseover", function() {
+      .on("mouseover", function(d) {
         var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "countiesOverlay stateZoomed") {
+        if (elementClass === "countiesOverlay stateZoomed") {
+          var county = fipsCodes.get(d.id);
+          var count = vehicleCounts.get(d.id);
+          count = count ? count : 0;
+
+          tooltip.transition()
+              .duration(200)
+              .style("opacity", 0.9);
+
+          tooltip
+              .html(county.countyName + ", " + county.stateName + "<br />" + count)
+              .style("left", (d3.event.pageX - 70) + "px")
+              .style("top", (d3.event.pageY - 80) + "px");
+        } else {
           element.attr("class", "countiesOverlay stateActive");
         }
       })
@@ -107,6 +124,10 @@ function ready(error, us) {
         if (elementClass !== "countiesOverlay stateZoomed") {
           element.attr("class", centered ? "countiesOverlay stateInactive" : "countiesOverlay");
         }
+
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
       });
 
   g.append("path")
@@ -140,6 +161,10 @@ function mapClick(d) {
     k = 1;
     centered = null;
     d3.selectAll(".countiesOverlay").attr("class", "countiesOverlay");
+
+    tooltip.transition()
+      .duration(500)
+      .style("opacity", 0);
   }
 
   g.transition()
