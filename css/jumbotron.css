@@ -6,6 +6,7 @@ body {
 
 .jumbotron{
     padding:25px;
+    width:100%;
 }
 
 .huge-map{
@@ -30,4 +31,60 @@ body {
 }
 
 .loading {
-    background: #fff url("/images/loading.gif") 50% 50% no-repeat;
+    background-color: #fff;
+    background-image: url("/images/loading.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+ /* to raise the graphic on screen, 
+    increase the subtrahend in the calc() operation */
+    margin: calc(100% - 95%) auto 0;
+}
+
+
+ /* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+    .huge-map{
+        min-height:auto;
+        min-width:95%;
+        width:100%;
+        margin-top:25px;
+        border:1px solid #ddd;
+        padding:20px 10px;
+    }
+    svg {
+        width: 100%;
+        height: auto;
+    }
+    .container {
+        width: 98%;
+    }
+}
+ 
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .huge-map{
+        min-height:auto;
+        min-width:95%;
+        width:100%;
+        margin-top:25px;
+        border:1px solid #ddd;
+        padding:20px 10px;
+    }
+    .navbar {
+        height: 50px;
+    }
+}
+ 
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+    .huge-map{
+        min-height:auto;
+        min-width:95%;
+        width:100%;
+        margin-top:25px;
+        border:1px solid #ddd;
+        padding:20px 10px;
+    }
+}

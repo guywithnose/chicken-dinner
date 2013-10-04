@@ -30,24 +30,24 @@
 <?php include 'nav.php' ?>
     <div class="jumbotron">
     <div class="container">
-        
+
         <!----correct input look ---->
         <br>
         <div class="input-group input-group-lg">
-        <input type="text" value="Enter a keyword" class="form-control" id="keyword">
+        <input type="text" value="" placeholder="Enter a keyword" class="form-control" id="keyword">
         <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
         </div>
         <!----end correct look ---->
-        
+
         <!--<select class="main-drop">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="mercedes">Mercedes</option>
           <option value="audi">Audi</option>
         </select> -->
-        
+
         <div id="huge-map" class="huge-map panel"></div>
-             
+
         <a id="tableToggle" class="btn btn-primary btn-lg" data-toggle="collapse" data-parent="#accordion" href="#collapse-data-more">
         Learn More About This Data
         </a>

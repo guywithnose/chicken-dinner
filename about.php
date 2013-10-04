@@ -26,8 +26,8 @@
 <?php include 'nav.php' ?>
     <div class="container">
     <h1>We Like Our Data Baked!</h1>
-    <p>To make your Data tender and juicy, be sure to add a little Heat. </p>
-    
+    <p>To make your Data tender and juicy, be sure to add a little Heat.</p>
+
     <p>By Heat Mapping your data across the U.S. you can actually visualize the information and come up with reasonable hypotheses.</p>
     
     <p><span style="font-weight:bold;">Question 1:</span> Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
@@ -35,7 +35,7 @@
     
     <p><span style="font-weight:bold;">Question 2:</span>  Don't believe us?<br />
     Get a Taste by trying it yourself!</p>
-    
+
     <div style="float:right;">
       <img src="images/chickendinner.png" style="width:350px; margin-right: 150px;">
     </div>
@@ -51,7 +51,7 @@
         <li>Spencer Reinhart - Dev</li>
       </ul>
     </div>
-    
+
     <h2>Don't forget our special ingredients!</h2>
     <ul>
       <li>Programmed using PHP 5.4, Javascript, & CSS/HTML</li>
@@ -65,6 +65,6 @@
       <li>Find Us on GitHub & Heroku</li>
       <span style="font-style:italic;">* Census Data APIs are unavailable due to Government Shutdown!</span>
     </ui>
-      
-      
+
+
 <?php include 'footer.php' ?>
