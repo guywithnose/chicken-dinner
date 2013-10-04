@@ -1,20 +1,24 @@
+.states {
+  fill: none;
+  pointer-events: none;
+}
+
 .counties {
   fill: none;
   pointer-events: none;
 }
 
-.states {
+.countiesOverlay {
   fill: none;
-  stroke: none;
   pointer-events: all;
 }
 
-.states.active {
+.countiesOverlay.stateActive {
   fill: #c37500;
-  fill-opacity: 0.4;
+  fill-opacity: 0.3;
 }
 
-.states.inactive {
+.countiesOverlay.stateInactive {
   fill: #000;
   fill-opacity: 0.6;
 }
@@ -33,4 +37,17 @@
 
 .colorlegend-title {
   font-size: 1.5em;
+}
+
+.map-tooltip {
+  position: absolute;
+  text-align: center;
+  width: 140px;
+  height: 60px;
+  padding: 10px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }

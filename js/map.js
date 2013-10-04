@@ -1,21 +1,45 @@
-var width = 960, height = 500, centered;
 
-var vehicleCounts = d3.map();
+var vehicleCounts = d3.map(), fipsCodes = d3.map(), stateMap = d3.map();
 
-var projection = d3.geo.albersUsa()
-    .scale(width)
-    .translate([width / 2, height / 2]);
+var width = 960, height = 500, centered, projection, path;
 
-var path = d3.geo.path().projection(projection);
+var tooltip = d3.select("body").append("div")
+    .attr("class", "map-tooltip")
+    .style("opacity", 0);
 
 queue()
     .defer(d3.json, "data/us.json")
-    .defer(d3.csv, "data/employment-fip.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
+    .defer(d3.csv, "data/US_FIPS_Codes.csv", function(d) {
+      fipsCodes.set(d.stateNumber.replace(/^0/, '') + d.countyNumber, {
+        stateName: d.state,
+        stateNumber: d.stateNumber,
+        countyName: d.county
+      });
+    })
+    .defer(d3.csv, "cyclemake.php?class=Jobs&make=", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
-var map, legend, g, legendTitle = "# of motorcycles for sale";
+var map, legend, g, legendTitle = "# of jobs available";
+
+var lastUs;
 
 function ready(error, us) {
+  lastUs = us;
+  var containerMaxWidth = $('#huge-map').width();
+  var containerMaxHeight = $(window).height() - $('.navbar').height();
+  if (containerMaxWidth / containerMaxHeight > 960 / 500) {
+      containerMaxWidth = containerMaxHeight * 960 / 500;
+  } else {
+      containerMaxHeight = containerMaxWidth * 500 / 960;
+  }
+
+  width = Math.min(960, containerMaxWidth), height = Math.min(500, containerMaxHeight);
+  projection = d3.geo.albersUsa()
+    .scale(width)
+    .translate([width / 2, height / 2]);
+
+  path = d3.geo.path().projection(projection);
+
   $("#huge-map").html("");
   map = d3.select("#huge-map").append("svg")
       .attr("width", width)
@@ -42,33 +66,68 @@ function ready(error, us) {
       .range([d3.hsl(210, 1, 0.95), d3.hsl(210, 1, 0.05)]);
 
   g.append("g")
-      .attr("class", "counties")
-    .selectAll("path")
-      .data(topojson.feature(us, us.objects.counties).features)
-    .enter().append("path")
-      .style("fill", function(d) { return vehicleCountColor(+vehicleCounts.get(d.id)); })
-      .attr("d", path);
-
-  g.append("g")
       .attr("class", "states")
     .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
       .attr("d", path)
+      .attr("stateId", function(d) { stateMap.set(d.id, d); return d.id; });
+
+  g.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .style("fill", function(d) { var count = getFipData(d.id); return vehicleCountColor(count ? count : 0); })
+      .attr("d", path)
+      .attr("stateId", function(d) {
+        var fips = fipsCodes.get(d.id);
+        return fips ? fips.stateNumber.replace(/^0/, '') : null;
+      })
+      .attr("countyId", function(d) { return d.id; });
+
+  g.append("g")
+      .attr("class", "countiesOverlay")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("stateId", function(d) {
+        var fips = fipsCodes.get(d.id);
+        return fips ? fips.stateNumber.replace(/^0/, '') : null;
+      })
+      .attr("countyId", function(d) { return d.id; })
       .on("click", mapClick)
-      .on("mouseover", function() {
-        var element = d3.select(this);
+      .on("mouseover", function(d) {
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "states zoomed") {
-          element.attr("class", "states active");
+        if (elementClass === "countiesOverlay stateZoomed") {
+          var county = fipsCodes.get(d.id);
+          var count = getFipData(d.id);
+          count = count ? count : 0;
+
+          tooltip.transition()
+              .duration(200)
+              .style("opacity", 0.9);
+
+          tooltip
+              .html(county.countyName + ", " + county.stateName + "<br />" + count)
+              .style("left", (d3.event.pageX - 70) + "px")
+              .style("top", (d3.event.pageY - 80) + "px");
+        } else {
+          element.attr("class", "countiesOverlay stateActive");
         }
       })
       .on("mouseout", function() {
-        var element = d3.select(this);
+        var element = d3.selectAll('[stateId="' + d3.select(this).attr("stateId") + '"]');
         var elementClass = element.attr("class");
-        if (elementClass !== "states zoomed") {
-          element.attr("class", centered ? "states inactive" : "states");
+        if (elementClass !== "countiesOverlay stateZoomed") {
+          element.attr("class", centered ? "countiesOverlay stateInactive" : "countiesOverlay");
         }
+
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
       });
 
   g.append("path")
@@ -81,28 +140,69 @@ function ready(error, us) {
   if ($('#collapse-data-more').is(':visible')) {
       generateChart();
   }
+
+  if (legendTitle.search('households') == -1) {
+      $('#popMap').show();
+  } else {
+      $('#popMap').hide();
+  }
+}
+
+function getFipData(fipNum)
+{
+    if ($('#popMap').hasClass('btn-primary') || $.isEmptyObject(popData) || legendTitle.search('households') != -1) {
+        return vehicleCounts.get(fipNum);
+    }
+
+    if (vehicleCounts.get(fipNum) >= 30) {
+        return 0;
+    } else {
+        return popData[fipNum] / vehicleCounts.get(fipNum);
+    }
 }
 
 function mapClick(d) {
   var x, y, k;
+  var stateId = d3.select(this).attr("stateId");
+  var state = stateMap.get(stateId);
 
-  if (d && centered !== d) {
-    var centroid = path.centroid(d), bounds = path.bounds(d);
+  if (d && centered !== state) {
+    var centroid = path.centroid(state), bounds = path.bounds(state);
     x = centroid[0];
     y = centroid[1];
     k = 0.75 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
-    centered = d;
-    d3.selectAll(".states").attr("class", "states inactive");
-    d3.select(this).attr("class", "states zoomed");
+    centered = state;
+    d3.selectAll('.countiesOverlay:not([stateId="' + stateId + '"])').attr("class", "countiesOverlay stateInactive");
+    d3.selectAll('.countiesOverlay[stateId="' + stateId + '"]').attr("class", "countiesOverlay stateZoomed");
   } else {
     x = width / 2;
     y = height / 2;
     k = 1;
     centered = null;
-    d3.selectAll(".states").attr("class", "states");
+    d3.selectAll(".countiesOverlay").attr("class", "countiesOverlay");
+
+    tooltip.transition()
+      .duration(500)
+      .style("opacity", 0);
   }
 
   g.transition()
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 }
+
+var popData = {};
+$(function(){
+   d3.csv('data/income-fips.csv', function(d){
+       for (var i in d) {
+           var data = d[i];
+           popData[data.fips] = data['Total Households'];
+       }
+   });
+});
+
+$(window).resize(function(){
+    if (lastUs) {
+        ready(null, lastUs);
+    }
+});

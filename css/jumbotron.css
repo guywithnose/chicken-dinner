@@ -6,11 +6,10 @@ body {
 
 .jumbotron{
     padding:25px;
+    width:100%;
 }
 
 .huge-map{
-    min-height:500px;
-    min-width:960px;
     width:100%;
     margin-top:25px;
     border:1px solid #ddd;
@@ -30,4 +29,23 @@ body {
 }
 
 .loading {
-    background: #fff url("/images/loading.gif") 50% 50% no-repeat;
+    background-color: #fff;
+    background-image: url("/images/loading.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+ /* to raise the graphic on screen, 
+    increase the subtrahend in the calc() operation */
+    margin: calc(100% - 95%) auto 0;
+}
+.footer {
+    font-size: 14px;
+}
+
+.social {
+    margin-top: -55px;
+    width: 200px;
+    height: 50px;
+    float: right;
+}
