@@ -47,6 +47,7 @@
         <li>Chris Ryan - Dev</li>
         <li>Lucien Frelin - UI/Product</li>
         <li>Matt Strapko - Dev</li>
+        <li>Reese Howell - UI</li>
         <li>Spencer Reinhart - Dev</li>
       </ul>
     </div>
