@@ -61,6 +61,7 @@ $(function() {
                             .await(ready);
                     } else {
                         if (value == 'Population Density') {
+                            legendTitle = '# of households';
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
                             queue().defer(d3.json, "data/us.json")
@@ -68,6 +69,7 @@ $(function() {
                                 .await(ready);
                         } else if (value.search('Households that make \\$') != -1) {
                             var incomeRange = value.replace('Households that make $', '');
+                            legendTitle = '# of households that make $' + incomeRange;
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
                             queue().defer(d3.json, "data/us.json")
