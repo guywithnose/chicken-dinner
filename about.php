@@ -26,16 +26,16 @@
 <?php include 'nav.php' ?>
     <div class="container">
     <h1>We Like Our Data Baked!</h1>
-    <p>To make your Data tender and juicy, be sure to add a little Heat. </p>
-    
+    <p>To make your Data tender and juicy, be sure to add a little Heat.</p>
+
     <p>By Heat Mapping your data across the U.S. you can actually visualize the information and come up with reasonable hypotheses.</p>
-    
+
     <p>Question 1: Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
     The answer... NO ONE!</p>
-    
+
     <p>Question 2:  Don't believe us?<br />
     Get a Taste by trying it yourself!</p>
-    
+
     <div style="float:right;">
       <img src="/images/chickendinner.png" style="width:350px; margin-right: 150px;">
     </div>
@@ -45,12 +45,12 @@
         <li>Anthony Bittle - Dev</li>
         <li>Brandon Beigay - Pro Dev/UI</li>
         <li>Chris Ryan - Dev</li>
-        <li>Lucien Frelin - UI
+        <li>Lucien Frelin - UI</li>
         <li>Matt Strapko - Dev</li>
         <li>Spencer Reinhart - Dev</li>
       </ul>
     </div>
-    
+
     <h2>Don't forget our special ingredients!</h2>
     <ul>
       <li>Programmed using PHP 5.4, Javascript, & CSS/HTML</li>
@@ -64,7 +64,7 @@
       <li>UI - Twitter Bootstrap (Jumbotron Theme), Jquery UI</li>
       <li>Find Us on GitHub & Heroku</li>
     </ui>
-      
-      
+
+
 <?php include 'footer.php' ?>
- 
+

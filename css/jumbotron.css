@@ -30,4 +30,13 @@ body {
 }
 
 .loading {
-    background: #fff url("/images/loading.gif") 50% 50% no-repeat;
+    background-color: #fff;
+    background-image: url("/images/loading.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+ /* to raise the graphic on screen, 
+    increase the subtrahend in the calc() operation */
+    margin: calc(100% - 95%) auto 0;
+}
