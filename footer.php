@@ -1,5 +1,3 @@
-</div> <!-- /container -->
-</div> <!--  /jumbotron -->
 <hr>
 <h5 class="text-muted footer">Data Partners</h5>
 <ul class="list-inline text-muted footer">
@@ -19,7 +17,8 @@
 <hr>
 <div class="text-center"><a href="about.php"><img src="images/formula.png"></a></div>
 
-
+    </div> <!-- /container -->
+</div> <!-- /jumbotron -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

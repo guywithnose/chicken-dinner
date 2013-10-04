@@ -40,7 +40,6 @@ body {
     margin: calc(100% - 95%) auto 0;
 }
 .footer {
-    max-width:970px;
-    margin: 0 auto 1em;
+    font-size: 14px;
 }
 
