@@ -35,8 +35,6 @@ function generateChart() {
             var fips = fipsData[''+key];
             if (fips) {
                 rows.push([fips.State, fips.County, count]);
-            } else {
-                console.log('Unknown fips: ' + fips);
             }
         }
 

@@ -1,12 +1,7 @@
-var width = 960, height = 500, centered;
 
 var vehicleCounts = d3.map(), fipsCodes = d3.map(), stateMap = d3.map();
 
-var projection = d3.geo.albersUsa()
-    .scale(width)
-    .translate([width / 2, height / 2]);
-
-var path = d3.geo.path().projection(projection);
+var width = 960, height = 500, centered, projection, path;
 
 queue()
     .defer(d3.json, "data/us.json")
@@ -22,7 +17,25 @@ queue()
 
 var map, legend, g, legendTitle = "# of motorcycles for sale";
 
+var lastUs;
+
 function ready(error, us) {
+  lastUs = us;
+  var containerMaxWidth = $('#huge-map').width();
+  var containerMaxHeight = $(window).height() - $('.navbar').height();
+  if (containerMaxWidth / containerMaxHeight > 960 / 500) {
+      containerMaxWidth = containerMaxHeight * 960 / 500;
+  } else {
+      containerMaxHeight = containerMaxWidth * 500 / 960;
+  }
+
+  width = Math.min(960, containerMaxWidth), height = Math.min(500, containerMaxHeight);
+  projection = d3.geo.albersUsa()
+    .scale(width)
+    .translate([width / 2, height / 2]);
+
+  path = d3.geo.path().projection(projection);
+
   $("#huge-map").html("");
   map = d3.select("#huge-map").append("svg")
       .attr("width", width)
@@ -133,3 +146,9 @@ function mapClick(d) {
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 }
+
+$(window).resize(function(){
+    if (lastUs) {
+        ready(null, lastUs);
+    }
+});
