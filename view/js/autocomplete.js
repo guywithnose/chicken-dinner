@@ -1,7 +1,7 @@
 $(function() {
     var issueData;
     $.ajax({
-        url: 'issues.json',
+        url: 'data/issues.json',
         dataType: 'json',
         success: function(data){
             issueData = data;
@@ -25,7 +25,7 @@ $(function() {
                         if (issueData[className] && issueData[className][make]) {
                             $('#huge-map').html('<div class="loading">&nbsp;</div>');
                             vehicleCounts = d3.map();
-                            queue().defer(d3.json, "us.json")
+                            queue().defer(d3.json, "data/us.json")
                                 .defer(d3.csv, "cyclemake.php?class=" + className + "&make=" + make, function(d) { vehicleCounts.set(d.fips, +d.data); })
                                 .await(ready);
                         }

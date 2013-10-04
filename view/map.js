@@ -9,8 +9,8 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path().projection(projection);
 
 queue()
-    .defer(d3.json, "us.json")
-    .defer(d3.csv, "cycle.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
+    .defer(d3.json, "data/us.json")
+    .defer(d3.csv, "data/cycle.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
 var map, legend, g;

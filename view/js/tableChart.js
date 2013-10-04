@@ -2,7 +2,7 @@ var fipsData;
 google.load('visualization', '1', {packages:['table']});
 $(function() {
     $.ajax({
-        url: '/fipsData.json',
+        url: '/data/fipsData.json',
         dataType: 'json',
         success: function(data) {
             fipsData = data;

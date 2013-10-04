@@ -2,7 +2,7 @@
 
 header('Content-Type: text/csv');
 
-$issues = json_decode(file_get_contents('issues.json'), true);
+$issues = json_decode(file_get_contents('data/issues.json'), true);
 $issueId = $issues[$_GET['class']][$_GET['make']];
 
 $curl = curl_init();
