@@ -13,7 +13,7 @@ queue()
     .defer(d3.csv, "data/cycle.csv", function(d) { vehicleCounts.set(d.fips, +d.data); })
     .await(ready);
 
-var map, legend, g;
+var map, legend, g, legendTitle = "# of motorcycles for sale";
 
 function ready(error, us) {
   $("#huge-map").html("");
@@ -76,7 +76,7 @@ function ready(error, us) {
       .attr("class", "state-borders")
       .attr("d", path);
 
-  colorlegend("#legend", vehicleCountColor, "log", {title: "# of motorcycles for sale"});
+  colorlegend("#legend", vehicleCountColor, "log", {title: legendTitle});
 
   if ($('#collapse-data-more').is(':visible')) {
       generateChart();
