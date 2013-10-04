@@ -3,17 +3,19 @@
 <ul class="list-inline text-muted">
   <li>EmploymentGuide.com</li>
   <li>AeroTrader.com</li>
-  <li>Homes.com</li>
-  <li>ForRent.com</li>
-  <li>Cycletrader.com</li>
+  <li>CycleTrader.com</li>
+  <li>RVTrader.com</li>
+  <li>CommercialTruckTrader.com</li>
+  <li>EquipmentTrader.com</li>
+  <li>2000 Census Data</li>
 </ul>
 <hr>
 <footer class="text-muted clearfix">
 <p class="pull-left"><small>&copy; DataBake - Dominion Enterprises 2013</small></p>
-<p class="pull-right"><small>Just add heat.</small></p>
+<p class="pull-right"><small>Just Add Heat!</small></p>
 </footer>
 <hr>
-<div class="text-center"><img src="images/formula.png"></div>
+<div class="text-center"><a href="about.php"><img src="images/formula.png"></a></div>
 
     </div> <!-- /container -->
 
