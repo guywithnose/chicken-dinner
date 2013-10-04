@@ -43,3 +43,9 @@ body {
     font-size: 14px;
 }
 
+.social {
+    margin-top: -55px;
+    width: 200px;
+    height: 50px;
+    float: right;
+}
