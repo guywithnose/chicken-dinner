@@ -24,15 +24,16 @@
 
   <body>
 <?php include 'nav.php' ?>
+    <div class="jumbotron">
     <div class="container">
     <h1>We Like Our Data Baked!</h1>
     <p>To make your Data tender and juicy, be sure to add a little Heat.</p>
 
     <p>By Heat Mapping your data across the U.S. you can actually visualize the information and come up with reasonable hypotheses.</p>
-    
+
     <p><span style="font-weight:bold;">Question 1:</span> Who wants to look at boring numbers on a spreadsheet in order to make intelligent decisions!?<br />
     The answer... NO ONE!</p>
-    
+
     <p><span style="font-weight:bold;">Question 2:</span>  Don't believe us?<br />
     Get a Taste by trying it yourself!</p>
 
