@@ -29,7 +29,7 @@ var colorlegend = function (target, scale, type, options) {
     , colors = []
     , padding = [2, 4, 10, 4]               // top, right, bottom, left
     , boxSpacing = type === 'ordinal' ? 10 : 0 // spacing between boxes
-    , titlePadding = title ? 11 : 0
+    , titlePadding = title ? 15 : 0
     , domain = scale.domain()
     , range = scale.range()    
     , i = 0;
@@ -135,10 +135,10 @@ var colorlegend = function (target, scale, type, options) {
   if (title) {
     legend.append('text')
         .attr('class', 'colorlegend-title')
-        .attr('x', (colors.length * (boxWidth / 2)))
+        .attr('x', 0)
         .attr('y', boxHeight + titlePadding)
         .attr('dy', '.71em')
-        .style('text-anchor', 'middle')
+        .style('text-anchor', 'start')
         .style('pointer-events', 'none')
         .text(title);
   }
