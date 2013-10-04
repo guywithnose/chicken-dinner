@@ -16,7 +16,8 @@ $(function() {
               'Motorcycle': vehicleMapper('motorcycles'),
               'ATV': vehicleMapper('atvs'),
               'PWC': vehicleMapper('pwcs'),
-              'Snowmobile': vehicleMapper('snowmobiles')
+              'Snowmobile': vehicleMapper('snowmobiles'),
+              'Jobs': function() {return '# of jobs available';}
             };
 
             for (var i in data) {
